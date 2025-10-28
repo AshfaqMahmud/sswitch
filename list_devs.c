@@ -1,7 +1,18 @@
 #include <pcap.h>
 #include <stdio.h>
 
+struct ethhdr
+{
+    unsigned char dst[6];
+    unsigned char src[6];
+    unsigned short ethertype;
+};
+
 void packet_handler(u_char *args, const struct pcap_pkthdr *header, const u_char *packet) {
+    const struct ethhdr *eth = (struct ethhdr *)packet;
+    printf("Src MAC: %02x:%02x:%02x:%02x:%02x:%02x\n",
+           eth->src[0], eth->src[1], eth->src[2],
+           eth->src[3], eth->src[4], eth->src[5]);
     printf("Packet captured: length= %d bytes, timestamp= %ld\n", header->len, header->ts.tv_sec);
 }
 
