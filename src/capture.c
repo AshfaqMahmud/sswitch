@@ -6,8 +6,8 @@
 #include <string.h>
 #include <stdio.h>
 
-static Interface *ifaces;
-static int iface_count;
+static Interface *ifaces;   // network interface of switch, mostly ethernets
+static int iface_count;     // how many interfaces are there like giga,fast, etc
 
 void packet_handler(u_char *user, const struct pcap_pkthdr *header, const u_char *packet)
 {
